@@ -6,10 +6,15 @@
 
 package crud;
 
+import static crud.Login.contador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -18,14 +23,65 @@ import javax.swing.JTextField;
  * @author Jhorman Gonzalez << Jhorman967@gmail.com >>
  */
 public class FogetPass extends javax.swing.JFrame {
+     static int contador=0;
     DataBase cc = new DataBase();
     Connection con = cc.Conexion();
+      public void images(){
+    
+    int velocidad = 3;
+        
+        Timer timer;
+        TimerTask tarea;
+        
+        int velmil = velocidad*1000;
+        
+        
+       
+        tarea = new TimerTask(){
+            @Override
+            public void run (){
+                Icon icono;
+                switch(contador){
+                    case 0:
+                        contador = 1;
+                        icono = new ImageIcon(getClass().getResource("/Images/estudiante-estudiando.jpg"));
+                        ImagenLogin.setIcon(icono);
+                        break;
+                    
+                    case 1: 
+                        contador = 2;
+                        icono = new ImageIcon(getClass().getResource("/Images/graduacion.jpg"));
+                        ImagenLogin.setIcon(icono);
+                        break;
+                    case 2: 
+                        contador = 3;
+                        icono = new ImageIcon(getClass().getResource("/Images/estudiantes-table.jpg"));
+                        ImagenLogin.setIcon(icono);
+                        break;
+                     case 3: 
+                        contador = 1;
+                        icono = new ImageIcon(getClass().getResource("/Images/estudiante-estudiando.jpg"));
+                        ImagenLogin.setIcon(icono);
+                        break;  
+                }
+            }
+                  
+        };
+        
+        timer = new Timer();
+//        
+        timer.scheduleAtFixedRate(tarea,velmil,velmil);
+       
+    
+    
+    }
 
     /** Creates new form Login */
     public FogetPass() {
         initComponents();
          this.setLocationRelativeTo(null);
          this.setResizable(false);
+         this.images();
     }
     
     public void ModificarPass() {
